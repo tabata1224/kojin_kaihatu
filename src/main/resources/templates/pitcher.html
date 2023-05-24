@@ -12,8 +12,8 @@
     </p>
 
     <tbody th:each="menber : ${hansin}" th:object=${menber}>
-        <td th:text="*{uniformNumber}"></td>
         <td th:text="*{playerId}"></td>
+        <td th:text="*{uniformNumber}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{teamId}"></td>
         <td th:text="*{pitched}"></td>

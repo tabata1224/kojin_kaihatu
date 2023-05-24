@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.form.EditFielderForm;
 import com.example.demo.form.FielderForm;
 import com.example.demo.form.PitcherForm;
 import com.example.demo.model.Fielder;
@@ -77,7 +78,7 @@ public class BaseBallController {
 
         model.addAttribute("fielderForm", new FielderForm());
 
-        return "addBatter";
+        return "addFielder";
     }
 
     /**
@@ -150,6 +151,38 @@ public class BaseBallController {
         model.addAttribute("teams", repository.findAll());
 
         // チームの一覧画面にリダイレクト
+        return "/baseball";
+    }
+
+    /**
+     * 更新画面を表示
+     * 
+     * @param model
+     * @return 更新画面
+     */
+
+    @GetMapping("/fielder-edit")
+    public String editFielder(@RequestParam("id") int id, Model model, EditFielderForm editFielder) {
+        editFielder = fielderService.getOneFielder(id);
+        model.addAttribute("editFielderForm", new EditFielderForm());
+
+        return "editFielder";
+    }
+
+    /**
+     * fielderデータベースにを登録する
+     * 
+     * @param editFielderForm
+     * @param model
+     * @return
+     */
+    @PostMapping("/fielder-edit")
+    public String saveEditFielder(@ModelAttribute EditFielderForm editFielderForm, Model model) {
+
+        // fielderを登録する
+        fielderService.update(editFielderForm);
+        model.addAttribute("teams", repository.findAll());
+        // fielderの一覧表示画面にリダイレクト
         return "/baseball";
     }
 }

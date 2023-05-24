@@ -12,8 +12,8 @@
     </p>
 
     <tbody th:each="menber : ${hansin}" th:object=${menber}>
-        <td th:text="*{uniformNumber}"></td>
         <td th:text="*{playerId}"></td>
+        <td th:text="*{uniformNumber}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{teamId}"></td>
         <td th:text="*{orderNum}"></td>
@@ -25,6 +25,7 @@
         <td th:text="*{homerun}"></td>
         <td th:text="*{runBattedIn}"></td>
         <td th:text="*{baseStealing}"></td>
+        <a th:href="@{/fielder-edit(id=*{playerId})}">編集</a>
         <a th:href="@{/fielder-delete(id=*{playerId})}">削除</a>
         <p></p>
     </tbody>
