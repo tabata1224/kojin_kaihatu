@@ -129,12 +129,24 @@ public class BaseBallController {
         return "/baseball";
     }
 
-    // 選手の削除を行う
+    // 野手の削除を行う
     @GetMapping("/fielder-delete")
     public String deleteFielder(@RequestParam("id") int id, Model model) {
 
         // データベースのデータを削除する
         fielderService.delete(id);
+        model.addAttribute("teams", repository.findAll());
+
+        // チームの一覧画面にリダイレクト
+        return "/baseball";
+    }
+
+    // 野手の削除を行う
+    @GetMapping("/pitcher-delete")
+    public String deletePitcher(@RequestParam("id") int id, Model model) {
+
+        // データベースのデータを削除する
+        pitcherService.delete(id);
         model.addAttribute("teams", repository.findAll());
 
         // チームの一覧画面にリダイレクト

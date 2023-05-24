@@ -24,6 +24,7 @@
         <td th:text="*{hold}"></td>
         <td th:text="*{inningsPitched}"></td>
         <td th:text="*{strikeOut}"></td>
+        <a th:href="@{/pitcher-delete(id=*{playerId})}">削除</a>
         <p></p>
     </tbody>
     <a th:href="@{/BaseBall}">戻る</a>

@@ -53,4 +53,11 @@ public class PitcherService {
         // データベースに登録する
         repository.save(pitcher);
     }
+
+    // 投手を削除する
+    public void delete(Integer id) {
+
+        // idを指定して、データベースからデータを削除する
+        repository.deleteById(id);
+    }
 }
