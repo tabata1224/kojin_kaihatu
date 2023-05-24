@@ -12,7 +12,7 @@ public class HelloController {
     @Autowired
     WeatherService weatherService;
 
-    @RequestMapping()
+    @RequestMapping("/sgfsd")
     public String hello(Model model) {
 
         model.addAttribute("hello", "Hello World!"); // Hello World!の表示

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>野手登録</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>野手を新規で登録する</h1>
+        <form th:action="@{/fielder-create}" th:object="${fielderForm}" method="POST">
+            <div>
+                <label for="uniformNumber">背番号</label>
+                <input id="uniformNumber" type="text" th:field="*{uniformNumber}">
+            </div>
+            <div>
+                <label for="name">名前</label>
+                <input id="name" type="text" th:field="*{name}">
+            </div>
+            <div>
+                <label for="teamId">チームID</label>
+                <input id="teamId" type="number" th:field="*{teamId}">
+            </div>
+            <div>
+                <label for="orderNum">打順</label>
+                <input id="orderNum" type="number" th:field="*{orderNum}">
+            </div>
+            <div>
+                <label for="position">ポジション</label>
+                <input id="position" type="number" th:field="*{position}">
+            </div>
+            <div>
+                <label for="battingAverage">打率</label>
+                <input id="battingAverage" type="number" step="0.001" th:field="*{battingAverage}">
+            </div>
+            <div>
+                <label for="hit">安打</label>
+                <input id="hit" type="number" th:field="*{hit}">
+            </div>
+            <div>
+                <label for="doubleHit">二塁打</label>
+                <input id="doubleHit" type="number" th:field="*{doubleHit}">
+            </div>
+            <div>
+                <label for="threeHit">三塁打</label>
+                <input id="threeHit" type="number" th:field="*{threeHit}">
+            </div>
+            <div>
+                <label for="homerun">本塁打</label>
+                <input id="homerun" type="number" th:field="*{homerun}">
+            </div>
+            <div>
+                <label for="runBattedIn">打点</label>
+                <input id="runBattedIn" type="number" th:field="*{runBattedIn}">
+            </div>
+            <div>
+                <label for="baseStealing">盗塁</label>
+                <input id="baseStealing" type="number" th:field="*{baseStealing}">
+            </div>
+            <input type="submit" class="btn btn-primary" value="新規登録">
+        </form>
+    </div>
+</body>
+
+</html>

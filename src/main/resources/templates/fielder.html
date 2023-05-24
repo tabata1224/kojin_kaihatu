@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>野手一覧</title>
+</head>
+
+<body>
+    <p>
+        野手一覧
+    </p>
+
+    <tbody th:each="menber : ${hansin}" th:object=${menber}>
+        <td th:text="*{uniformNumber}"></td>
+        <td th:text="*{playerId}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{teamId}"></td>
+        <td th:text="*{orderNum}"></td>
+        <td th:text="*{position}"></td>
+        <td th:text="*{battingAverage}"></td>
+        <td th:text="*{hit}"></td>
+        <td th:text="*{doubleHit}"></td>
+        <td th:text="*{threeHit}"></td>
+        <td th:text="*{homerun}"></td>
+        <td th:text="*{runBattedIn}"></td>
+        <td th:text="*{baseStealing}"></td>
+        <a th:href="@{/fielder-delete(id=*{playerId})}">削除</a>
+        <p></p>
+    </tbody>
+    <a th:href="@{/BaseBall}">戻る</a>
+</body>
+
+</html>

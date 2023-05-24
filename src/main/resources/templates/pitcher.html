@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>投手一覧</title>
+</head>
+
+<body>
+    <p>
+        投手一覧
+    </p>
+
+    <tbody th:each="menber : ${hansin}" th:object=${menber}>
+        <td th:text="*{uniformNumber}"></td>
+        <td th:text="*{playerId}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{teamId}"></td>
+        <td th:text="*{pitched}"></td>
+        <td th:text="*{earnedRunsAverage}"></td>
+        <td th:text="*{win}"></td>
+        <td th:text="*{lose}"></td>
+        <td th:text="*{save}"></td>
+        <td th:text="*{hold}"></td>
+        <td th:text="*{inningsPitched}"></td>
+        <td th:text="*{strikeOut}"></td>
+        <p></p>
+    </tbody>
+    <a th:href="@{/BaseBall}">戻る</a>
+
+</body>
+
+</html>
