@@ -46,16 +46,21 @@ public class BaseBallController {
     @GetMapping(path = "/fielder")
     public String showFielder(@RequestParam("num") int teamId, Model model) {
 
-        model.addAttribute("hansin", fielderService.findTeamMenber(teamId));
-
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAll());
+        } else {
+            model.addAttribute("hansin", fielderService.findTeamMenber(teamId));
+        }
         return "fielder";
     }
 
     @GetMapping(path = "/pitcher")
     public String showPitcher(@RequestParam("num") int teamId, Model model) {
-
-        model.addAttribute("hansin", pitcherService.findTeamMenber(teamId));
-
+        if (teamId == 0) {
+            model.addAttribute("hansin", pitcherBaseBallRepository.findAll());
+        } else {
+            model.addAttribute("hansin", pitcherService.findTeamMenber(teamId));
+        }
         return "pitcher";
     }
 

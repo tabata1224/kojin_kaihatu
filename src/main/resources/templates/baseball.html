@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <title>野球データベース</title>
-    <link th:href="@{/css/baseball.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -25,12 +24,30 @@
                 <nobr th:text="*{earnedRunsAverage}"></nobr>
                 <p></p>
             </tbody>
-            <p>野手を見たいチームの番号を入れて</p>
-            <input type="text" name="num">
+            <p>野手を見たいチームを選んでください</p>
+            <select type="number" name="num">
+                <option value=0>全球団</option>
+                <option value=1>ヤクルト</option>
+                <option value=2>DeNA</option>
+                <option value=3>阪神</option>
+                <option value=4>巨人</option>
+                <option value=5>広島</option>
+                <option value=6>中日</option>
+            </select>
+            <button type="submit">決定</button>
         </form>
         <form th:action="@{/pitcher}">
-            <p>投手を見たいチームの番号を入れて</p>
-            <input type="text" name="num">
+            <p>投手を見たいチームを選んでください</p>
+            <select type="number" name="num">
+                <option value=0>全球団</option>
+                <option value=1>ヤクルト</option>
+                <option value=2>DeNA</option>
+                <option value=3>阪神</option>
+                <option value=4>巨人</option>
+                <option value=5>広島</option>
+                <option value=6>中日</option>
+            </select>
+            <button type="submit">決定</button>
         </form>
     </div>
 </body>
