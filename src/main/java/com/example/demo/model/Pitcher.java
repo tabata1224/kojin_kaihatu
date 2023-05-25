@@ -18,7 +18,7 @@ public class Pitcher {
     private Integer playerId;
 
     @Column(name = "uniform_number")
-    private int uniformNumber;
+    private Integer uniformNumber;
 
     @Column(name = "name")
     private String name;

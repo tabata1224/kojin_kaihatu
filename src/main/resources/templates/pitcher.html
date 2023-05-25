@@ -24,9 +24,11 @@
         <td th:text="*{hold}"></td>
         <td th:text="*{inningsPitched}"></td>
         <td th:text="*{strikeOut}"></td>
+        <a th:href="@{/pitcher-edit(id=*{playerId})}">編集</a>
         <a th:href="@{/pitcher-delete(id=*{playerId})}">削除</a>
-        <p></p>
+        <br>
     </tbody>
+    <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
     <a th:href="@{/BaseBall}">戻る</a>
 
 </body>

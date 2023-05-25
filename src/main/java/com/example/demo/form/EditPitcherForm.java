@@ -7,7 +7,9 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class PitcherForm {
+public class EditPitcherForm {
+
+    private Integer playerId;
 
     @NotNull(message = "この項目は入力必須です")
     @Min(value = 0, message = "負の値は入力出来ません")

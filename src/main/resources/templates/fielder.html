@@ -27,9 +27,11 @@
         <td th:text="*{baseStealing}"></td>
         <a th:href="@{/fielder-edit(id=*{playerId})}">編集</a>
         <a th:href="@{/fielder-delete(id=*{playerId})}">削除</a>
-        <p></p>
+        <br>
     </tbody>
+    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
     <a th:href="@{/BaseBall}">戻る</a>
+
 </body>
 
 </html>

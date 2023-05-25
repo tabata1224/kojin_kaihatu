@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -26,6 +27,22 @@ public class FielderService {
 
     public List<Fielder> findAll() {
         return repository.findAll();
+    }
+
+    /**
+     * データベースからチームIDに一致する選手の一覧を取得する
+     * 
+     * @return
+     */
+    public List<Fielder> findTeamMenber(int teamId) {
+
+        List<Fielder> member = new ArrayList<>();
+        for (Fielder fielder : repository.findAll()) {
+            if (teamId == fielder.getTeamId()) {
+                member.add(fielder);
+            }
+        }
+        return member;
     }
 
     /**

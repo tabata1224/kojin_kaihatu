@@ -4,35 +4,35 @@
 <head>
     <meta charset="UTF-8" />
     <title>野球データベース</title>
+    <link th:href="@{/css/baseball.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <h1>
-        順位
-    </h1>
+    <div class="all">
+        <h1>
+            順位
+        </h1>
 
-    <form th:action="@{/fielder}">
-        <tbody th:each="team : ${teams}" th:object=${team}>
-            <nobr th:text="*{ranking}"></nobr>
-            <nobr th:text="*{name}"></nobr>
-            <nobr th:text="*{game}"></nobr>
-            <nobr th:text="*{win}"></nobr>
-            <nobr th:text="*{lose}"></nobr>
-            <nobr th:text="*{draw}"></nobr>
-            <nobr th:text="*{battingAverage}"></nobr>
-            <nobr th:text="*{earnedRunsAverage}"></nobr>
-            <p></p>
-        </tbody>
-        <p>野手を見たいチームの番号を入れて</p>
-        <input type="text" name="num">
-    </form>
-    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
-
-    <form th:action="@{/pitcher}">
-        <p>投手を見たいチームの番号を入れて</p>
-        <input type="text" name="num">
-    </form>
-    <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
+        <form th:action="@{/fielder}">
+            <tbody th:each="team : ${teams}" th:object=${team}>
+                <nobr th:text="*{ranking}"></nobr>
+                <nobr th:text="*{name}"></nobr>
+                <nobr th:text="*{game}"></nobr>
+                <nobr th:text="*{win}"></nobr>
+                <nobr th:text="*{lose}"></nobr>
+                <nobr th:text="*{draw}"></nobr>
+                <nobr th:text="*{battingAverage}"></nobr>
+                <nobr th:text="*{earnedRunsAverage}"></nobr>
+                <p></p>
+            </tbody>
+            <p>野手を見たいチームの番号を入れて</p>
+            <input type="text" name="num">
+        </form>
+        <form th:action="@{/pitcher}">
+            <p>投手を見たいチームの番号を入れて</p>
+            <input type="text" name="num">
+        </form>
+    </div>
 </body>
 
 </html>
