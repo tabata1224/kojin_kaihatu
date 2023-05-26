@@ -35,6 +35,7 @@ public class BaseBallController {
 
     private Integer menberId;
 
+    // メイン画面を表示
     @GetMapping("/BaseBall")
     public String show(Model model) {
 
@@ -43,17 +44,19 @@ public class BaseBallController {
         return "baseball";
     }
 
+    // 野手一覧の表示
     @GetMapping(path = "/fielder")
     public String showFielder(@RequestParam("num") int teamId, Model model) {
 
         if (teamId == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAll());
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByUniformNumberAsc());
         } else {
-            model.addAttribute("hansin", fielderService.findTeamMenber(teamId));
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
         }
         return "fielder";
     }
 
+    // 投手一覧の表示
     @GetMapping(path = "/pitcher")
     public String showPitcher(@RequestParam("num") int teamId, Model model) {
         if (teamId == 0) {
@@ -239,5 +242,101 @@ public class BaseBallController {
         model.addAttribute("hansin", pitcherService.findTeamMenber(editPitcherForm.getTeamId()));
         // pitcherの一覧表示画面にリダイレクト
         return "pitcher";
+    }
+
+    // 野手の並び替え機能(打順)
+    @GetMapping(path = "/fielder-sortOrder")
+    public String fielderSortOrder(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByOrderNumAsc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByOrderNumAsc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(打率)
+    @GetMapping(path = "/fielder-sortBattingAverage")
+    public String fielderSortAattingAverage(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByBattingAverageDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByBattingAverageDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(安打数)
+    @GetMapping(path = "/fielder-sortHit")
+    public String fielderSortHit(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByHitDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByHitDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(二塁打数)
+    @GetMapping(path = "/fielder-sortDoubleHit")
+    public String fielderSortDoubleHit(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByDoubleHitDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByDoubleHitDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(三塁打数)
+    @GetMapping(path = "/fielder-sortThreeHit")
+    public String fielderSortThreeHit(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByThreeHitDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByThreeHitDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(本塁打数)
+    @GetMapping(path = "/fielder-sortHomerun")
+    public String fielderSortHomerun(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByHomerunDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByHomerunDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(打点)
+    @GetMapping(path = "/fielder-sortRunBattedIn")
+    public String fielderSortRunBattedIn(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByRunBattedInDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByRunBattedInDesc(teamId));
+        }
+        return "fielder";
+    }
+
+    // 野手の並び替え機能(盗塁)
+    @GetMapping(path = "/fielder-sortBaseStealing")
+    public String fielderSortBaseStealingIn(@RequestParam("teamId") int teamId, Model model) {
+
+        if (teamId == 0) {
+            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByBaseStealingDesc());
+        } else {
+            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByBaseStealingDesc(teamId));
+        }
+        return "fielder";
     }
 }

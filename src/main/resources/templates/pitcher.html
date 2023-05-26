@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>投手一覧</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -12,7 +13,6 @@
     </p>
 
     <tbody th:each="menber : ${hansin}" th:object=${menber}>
-        <td th:text="*{playerId}"></td>
         <td th:text="*{uniformNumber}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{teamId}"></td>

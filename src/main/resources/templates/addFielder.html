@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>野手登録</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +52,7 @@
             </div>
             <div>
                 <label for="position">ポジション</label><br>
-                <select id="orderNum" type="number" th:field="*{orderNum}">
+                <select id="position" type="number" th:field="*{position}">
                     <option value=2>キャッチャー</option>
                     <option value=3>ファースト</option>
                     <option value=4>セカンド</option>
@@ -66,7 +67,7 @@
                 <p th:if="${#fields.hasErrors('battingAverage')}" th:errors="*{battingAverage}" class="text-danger">
                     battingAverage Error</p>
                 <label for="battingAverage">打率</label><br>
-                <input id="battingAverage" type="number" step="0.001" th:field="*{battingAverage}"><br>
+                <input id="battingAverage" type="number" step="0.001" th:field="*{battingAverage}" value="0"><br>
             </div>
             <div>
                 <p th:if="${#fields.hasErrors('hit')}" th:errors="*{hit}" class="text-danger">
