@@ -11,24 +11,40 @@
     <p>
         野手一覧
     </p>
-
-    <tbody th:each="menber : ${hansin}" th:object=${menber}>
-        <td th:text="*{uniformNumber}"></td>
-        <td th:text="*{name}"></td>
-        <td th:text="*{teamId}"></td>
-        <td th:text="*{orderNum}"></td>
-        <td th:text="*{position}"></td>
-        <td th:text="*{battingAverage}"></td>
-        <td th:text="*{hit}"></td>
-        <td th:text="*{doubleHit}"></td>
-        <td th:text="*{threeHit}"></td>
-        <td th:text="*{homerun}"></td>
-        <td th:text="*{runBattedIn}"></td>
-        <td th:text="*{baseStealing}"></td>
-        <a th:href="@{/fielder-edit(id=*{playerId})}">編集</a>
-        <a th:href="@{/fielder-delete(id=*{playerId})}">削除</a>
-        <br>
-    </tbody>
+    <table border="1">
+        <tr>
+            <th>背番号</th>
+            <th>名前</th>
+            <th>チーム</th>
+            <th>打順</th>
+            <th>ポジション</th>
+            <th>打率</th>
+            <th>安打</th>
+            <th>二塁打</th>
+            <th>三塁打</th>
+            <th>本塁打</th>
+            <th>打点</th>
+            <th>盗塁</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="menber : ${hansin}" th:object=${menber}>
+            <td th:text="*{uniformNumber}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{teamId}"></td>
+            <td th:text="*{orderNum}"></td>
+            <td th:text="*{position}"></td>
+            <td th:text="*{battingAverage}"></td>
+            <td th:text="*{hit}"></td>
+            <td th:text="*{doubleHit}"></td>
+            <td th:text="*{threeHit}"></td>
+            <td th:text="*{homerun}"></td>
+            <td th:text="*{runBattedIn}"></td>
+            <td th:text="*{baseStealing}"></td>
+            <td><a th:href="@{/fielder-edit(id=*{playerId})}">編集</a></td>
+            <td><a th:href="@{/fielder-delete(id=*{playerId})}">削除</a></td>
+        </tr>
+    </table>
 
     <th:block th:if="${#lists.size(hansin) > 0}">
         <div th:object="${hansin[0]}">
@@ -44,7 +60,7 @@
         </div>
     </th:block>
     <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
-    <a th:href="@{/BaseBall}">戻る</a>
+    <a type="submit" th:href="@{/BaseBall}">戻る</a>
 
 </body>
 

@@ -12,30 +12,40 @@
         <h1>
             順位
         </h1>
-
-        <form th:action="@{/fielder}">
-            <tbody th:each="team : ${teams}" th:object=${team}>
-                <nobr th:text="*{ranking}"></nobr>
-                <nobr th:text="*{name}"></nobr>
-                <nobr th:text="*{game}"></nobr>
-                <nobr th:text="*{win}"></nobr>
-                <nobr th:text="*{lose}"></nobr>
-                <nobr th:text="*{draw}"></nobr>
-                <nobr th:text="*{battingAverage}"></nobr>
-                <nobr th:text="*{earnedRunsAverage}"></nobr>
-                <p></p>
-            </tbody>
-            <p>野手を見たいチームを選んでください</p>
-            <select type="number" name="num">
-                <option value=0>全球団</option>
-                <option value=1>ヤクルト</option>
-                <option value=2>DeNA</option>
-                <option value=3>阪神</option>
-                <option value=4>巨人</option>
-                <option value=5>広島</option>
-                <option value=6>中日</option>
-            </select>
-            <button type="submit">決定</button>
+        <table border="1">
+            <tr>
+                <th>順位</th>
+                <th>チーム名</th>
+                <th>試合数</th>
+                <th>勝ち</th>
+                <th>負け</th>
+                <th>引き分け</th>
+                <th>打率</th>
+                <th>防御率</th>
+            </tr>
+            <form th:action="@{/fielder}">
+                <tr th:each="team : ${teams}" th:object=${team}>
+                    <td th:text="*{ranking}"> </td>
+                    <td th:text="*{name}"> </td>
+                    <td th:text="*{game}"> </td>
+                    <td th:text="*{win}"> </td>
+                    <td th:text="*{lose}"> </td>
+                    <td th:text="*{draw}"> </td>
+                    <td th:text="*{battingAverage}"></td>
+                    <td th:text="*{earnedRunsAverage}"></td>
+                </tr>
+        </table>
+        <p>野手を見たいチームを選んでください</p>
+        <select type="number" name="num">
+            <option value=0>全球団</option>
+            <option value=1>ヤクルト</option>
+            <option value=2>DeNA</option>
+            <option value=3>阪神</option>
+            <option value=4>巨人</option>
+            <option value=5>広島</option>
+            <option value=6>中日</option>
+        </select>
+        <button type="submit">決定</button>
         </form>
         <form th:action="@{/pitcher}">
             <p>投手を見たいチームを選んでください</p>

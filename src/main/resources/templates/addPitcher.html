@@ -12,19 +12,19 @@
         <h1>投手を新規で登録する</h1>
         <form th:action="@{/pitcher-create}" th:object="${pitcherForm}" method="POST">
             <div>
+                <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
                     uniformNumber Error</p>
-                <label for="uniformNumber">背番号 (必須)</label><br>
                 <input id="uniformNumber" type="number" th:field="*{uniformNumber}"><br>
             </div>
             <div>
+                <label for="name">名前</label><br>
                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">name Error</p>
-                <label for="name">名前 (必須)</label><br>
                 <input id="name" type="text" th:field="*{name}"><br>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('teamId')}" th:errors="*{teamId}" class="text-danger">teamId Error</p>
                 <label for="teamId">チーム</label><br>
+                <p th:if="${#fields.hasErrors('teamId')}" th:errors="*{teamId}" class="text-danger">teamId Error</p>
                 <select id="teamId" type="number" th:field="*{teamId}">
                     <option value=1>ヤクルト</option>
                     <option value=2>DeNA</option>
@@ -35,49 +35,49 @@
                 </select>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('pitched')}" th:errors="*{pitched}" class="text-danger">pitched Error</p>
                 <label for="pitched">登板数</label><br>
+                <p th:if="${#fields.hasErrors('pitched')}" th:errors="*{pitched}" class="text-danger">pitched Error</p>
                 <input id="pitched" type="number" th:field="*{pitched}"><br>
             </div>
             <div>
+                <label for="earnedRunsAverage">防御率</label><br>
                 <p th:if="${#fields.hasErrors('earnedRunsAverage')}" th:errors="*{earnedRunsAverage}"
                     class="text-danger">earnedRunsAverage Error</p>
-                <label for="earnedRunsAverage">防御率</label><br>
                 <input id="earnedRunsAverage" type="number" step="0.01" th:field="*{earnedRunsAverage}"><br>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('win')}" th:errors="*{win}" class="text-danger">win Error</p>
                 <label for="win">勝ち</label><br>
+                <p th:if="${#fields.hasErrors('win')}" th:errors="*{win}" class="text-danger">win Error</p>
                 <input id="win" type="number" th:field="*{win}"><br>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('lose')}" th:errors="*{lose}" class="text-danger">lose Error</p>
                 <label for="lose">負け</label><br>
+                <p th:if="${#fields.hasErrors('lose')}" th:errors="*{lose}" class="text-danger">lose Error</p>
                 <input id="lose" type="number" th:field="*{lose}"><br>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('save')}" th:errors="*{teamsaveId}" class="text-danger">save Error</p>
                 <label for="save">セーブ</label><br>
+                <p th:if="${#fields.hasErrors('save')}" th:errors="*{save}" class="text-danger">save Error</p>
                 <input id="save" type="number" th:field="*{save}"><br>
             </div>
             <div>
-                <p th:if="${#fields.hasErrors('hold')}" th:errors="*{hold}" class="text-danger">hold Error</p>
                 <label for="hold">ホールド</label><br>
+                <p th:if="${#fields.hasErrors('hold')}" th:errors="*{hold}" class="text-danger">hold Error</p>
                 <input id="hold" type="number" th:field="*{hold}"><br>
             </div>
             <div>
+                <label for="inningsPitched">投球回</label><br>
                 <p th:if="${#fields.hasErrors('inningsPitched')}" th:errors="*{inningsPitched}" class="text-danger">
                     inningsPitched Error</p>
-                <label for="inningsPitched">投球回</label><br>
                 <input id="inningsPitched" type="number" step="0.1" th:field="*{inningsPitched}"><br>
             </div>
             <div>
+                <label for="strikeOut">奪三振</label><br>
                 <p th:if="${#fields.hasErrors('strikeOut')}" th:errors="*{strikeOut}" class="text-danger">strikeOut
                     Error</p>
-                <label for="strikeOut">奪三振</label><br>
                 <input id="strikeOut" type="number" th:field="*{strikeOut}"><br>
             </div>
-            <input type="submit" class="btn btn-primary" value="新規登録">
+            <input type="submit" value="登録">
         </form>
         <a type="submit" th:href="@{/BaseBall}">戻る</a>
     </div>

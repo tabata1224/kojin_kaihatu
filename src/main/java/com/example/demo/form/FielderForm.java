@@ -10,11 +10,11 @@ import lombok.Data;
 @Data
 public class FielderForm {
 
-    @NotNull(message = "この項目は入力必須です")
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer uniformNumber;
 
-    @NotBlank(message = "この項目は入力必須です")
+    @NotBlank(message = "入力してください")
     private String name;
 
     private Integer teamId;
@@ -27,21 +27,27 @@ public class FielderForm {
     @Min(value = 0, message = "1 ~ 0の値を入力してください")
     private double battingAverage;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer hit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer doubleHit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer threeHit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer homerun;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer runBattedIn;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer baseStealing;
 }

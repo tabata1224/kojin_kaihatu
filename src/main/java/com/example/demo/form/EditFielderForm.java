@@ -12,39 +12,45 @@ public class EditFielderForm {
 
     private Integer playerId;
 
-    @NotNull(message = "この項目は入力必須です")
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer uniformNumber;
 
-    @NotBlank(message = "この項目は入力必須です")
+    @NotBlank(message = "この項目は入力してください")
     private String name;
 
-    @NotNull(message = "この項目は入力必須です")
     private Integer teamId;
 
     private Integer orderNum;
 
     private Integer position;
 
+    @NotNull(message = "入力してください")
     @Max(value = 1, message = "1 ~ 0の値を入力してください")
     @Min(value = 0, message = "1 ~ 0の値を入力してください")
     private double battingAverage;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer hit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer doubleHit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer threeHit;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer homerun;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer runBattedIn;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer baseStealing;
 }

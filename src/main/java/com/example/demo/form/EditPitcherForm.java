@@ -11,36 +11,44 @@ public class EditPitcherForm {
 
     private Integer playerId;
 
-    @NotNull(message = "この項目は入力必須です")
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer uniformNumber;
 
-    @NotBlank(message = "この項目は入力必須です")
+    @NotBlank(message = "入力してください")
     private String name;
 
     private Integer teamId;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer pitched;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private double earnedRunsAverage;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer win;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer lose;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer save;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer hold;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private double inningsPitched;
 
+    @NotNull(message = "入力してください")
     @Min(value = 0, message = "負の値は入力出来ません")
     private Integer strikeOut;
 }
