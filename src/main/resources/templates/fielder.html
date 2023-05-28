@@ -8,9 +8,27 @@
 </head>
 
 <body>
-    <p>
+    <h1>
         野手一覧
-    </p>
+    </h1>
+
+    <th:block th:if="${#lists.size(hansin) > 0}">
+        <div th:object="${hansin[0]}">
+            <p>ソート</p>
+            <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
+            <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
+            <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
+            <a th:href="@{/fielder-sortDoubleHit(teamId=*{teamId})}">二塁打</a>
+            <a th:href="@{/fielder-sortThreeHit(teamId=*{teamId})}">三塁打</a>
+            <a th:href="@{/fielder-sortHomerun(teamId=*{teamId})}">本塁打</a>
+            <a th:href="@{/fielder-sortRunBattedIn(teamId=*{teamId})}">打点</a>
+            <a th:href="@{/fielder-sortBaseStealing(teamId=*{teamId})}">盗塁</a>
+            <br>
+        </div>
+    </th:block>
+    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
+    <a type="submit" th:href="@{/BaseBall}">戻る</a>
+
     <table border="1">
         <tr>
             <th>背番号</th>
@@ -45,23 +63,6 @@
             <td><a th:href="@{/fielder-delete(id=*{playerId})}">削除</a></td>
         </tr>
     </table>
-
-    <th:block th:if="${#lists.size(hansin) > 0}">
-        <div th:object="${hansin[0]}">
-            <p>ソート</p>
-            <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
-            <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
-            <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
-            <a th:href="@{/fielder-sortDoubleHit(teamId=*{teamId})}">二塁打</a>
-            <a th:href="@{/fielder-sortThreeHit(teamId=*{teamId})}">三塁打</a>
-            <a th:href="@{/fielder-sortHomerun(teamId=*{teamId})}">本塁打</a>
-            <a th:href="@{/fielder-sortRunBattedIn(teamId=*{teamId})}">打点</a>
-            <a th:href="@{/fielder-sortBaseStealing(teamId=*{teamId})}">盗塁</a>
-        </div>
-    </th:block>
-    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
-    <a type="submit" th:href="@{/BaseBall}">戻る</a>
-
 </body>
 
 </html>

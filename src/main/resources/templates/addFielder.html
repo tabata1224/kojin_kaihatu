@@ -28,10 +28,10 @@
                 <p th:if="${#fields.hasErrors('teamId')}" th:errors="*{teamId}" class="text-danger">
                     teamId Error</p>
                 <select id="teamId" type="number" th:field="*{teamId}">
-                    <option value=4>巨人</option>
                     <option value=1>ヤクルト</option>
                     <option value=2>DeNA</option>
                     <option value=3>阪神</option>
+                    <option value=4>巨人</option>
                     <option value=5>広島</option>
                     <option value=6>中日</option>
                 </select>
