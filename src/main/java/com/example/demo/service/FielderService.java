@@ -127,5 +127,4 @@ public class FielderService {
         // データベースに登録する
         repository.save(fielder);
     }
-
 }

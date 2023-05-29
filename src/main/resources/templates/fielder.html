@@ -11,6 +11,7 @@
     <h1>
         野手一覧
     </h1>
+    <img src="Hanshin_tigers_insignia.png">
 
     <th:block th:if="${#lists.size(hansin) > 0}">
         <div th:object="${hansin[0]}">
@@ -29,7 +30,7 @@
     <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
     <a type="submit" th:href="@{/BaseBall}">戻る</a>
 
-    <table border="1">
+    <table class="teams" border="1">
         <tr>
             <th>背番号</th>
             <th>名前</th>

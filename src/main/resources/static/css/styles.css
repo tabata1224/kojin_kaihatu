@@ -1,4 +1,41 @@
 html {
-    background-color: rgb(255, 254, 249);
-    margin: 0 auto;
+    background-color: black;
+    text-align: center;
+    color: rgb(245, 245, 238);
+}
+
+
+.teams {
+    margin: auto;
+}
+
+a {
+    font-weight: bold;
+    /*ホバー時の背景色*/
+    background-position: 0 0;
+    background-size: 200% auto;
+    color: rgb(245, 245, 238);
+    position: relative;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fbff27;
+
+}
+
+th,
+td {
+    background-color: rgb(41, 41, 38);
+    border: solid 1px;
+    /* 枠線指定 */
+    padding: 10px;
+    /* 余白指定 */
+}
+
+th {
+    background-color: rgb(68, 68, 60);
+
+    font-weight: bold;
+    /* 文字の太さ指定 */
 }

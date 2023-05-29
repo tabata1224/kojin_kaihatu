@@ -116,7 +116,6 @@ public class BaseBallController {
      * @param model
      * @return 新規登録画面
      */
-
     @GetMapping("/pitcher-create")
     public String createPitcher(Model model) {
 
