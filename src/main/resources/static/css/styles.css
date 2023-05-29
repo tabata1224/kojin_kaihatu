@@ -1,12 +1,12 @@
 html {
-    background-color: black;
+    background-color: rgb(27, 25, 25);
     text-align: center;
     color: rgb(245, 245, 238);
 }
 
-
 .teams {
-    margin: auto;
+    margin: 50px auto 30px auto;
+
 }
 
 a {
@@ -38,4 +38,51 @@ th {
 
     font-weight: bold;
     /* 文字の太さ指定 */
+}
+
+.logo {
+    text-align: center;
+    vertical-align: middle;
+    width: 26px;
+    height: auto;
+}
+
+.sortTitle {
+    margin-top: 55px;
+    margin-bottom: 15px;
+}
+
+.title {
+    margin: 30px auto;
+}
+
+.btn {
+    margin: 0 10px;
+    margin-bottom: 10px;
+}
+
+.register {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+select {
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 33px;
+    height: auto;
+}
+
+.select {
+    font-size: 30px;
+}
+
+.mainSelect {
+    size: 30px;
 }

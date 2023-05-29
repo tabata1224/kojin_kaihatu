@@ -8,14 +8,12 @@
 </head>
 
 <body>
-    <h1>
+    <h1 class="title">
         野手一覧
     </h1>
-    <img src="Hanshin_tigers_insignia.png">
-
-    <th:block th:if="${#lists.size(hansin) > 0}">
+    <th:block class="sort" th:if="${#lists.size(hansin) > 0}">
         <div th:object="${hansin[0]}">
-            <p>ソート</p>
+            <p class="sortTitle">成績別でソートできます</p>
             <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
             <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
             <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
@@ -27,8 +25,8 @@
             <br>
         </div>
     </th:block>
-    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
-    <a type="submit" th:href="@{/BaseBall}">戻る</a>
+    <a class="btn" th:href="@{/fielder-create}">野手追加</a>
+    <a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
 
     <table class="teams" border="1">
         <tr>
@@ -47,10 +45,35 @@
             <th></th>
             <th></th>
         </tr>
+
         <tr th:each="menber : ${hansin}" th:object=${menber}>
             <td th:text="*{uniformNumber}"></td>
             <td th:text="*{name}"></td>
-            <td th:text="*{teamId}"></td>
+            <td>
+                <th:brock th:if="*{teamId} == 1">
+                    <img class="logo" th:src="@{/images/yakult.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{teamId} == 2">
+                    <img class="logo" th:src="@{/images/DeNA.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{teamId} == 3">
+                    <img class="logo" th:src="@{/images/hanshin.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{teamId} == 4">
+                    <img class="logo" th:src="@{/images/kyojin.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{teamId} == 5">
+                    <img class="logo" th:src="@{/images/hiroshima.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{teamId} == 6">
+                    <img class="logo" th:src="@{/images/chunichi.jpg}">
+                </th:brock>
+            </td>
             <td th:text="*{orderNum}"></td>
             <td th:text="*{position}"></td>
             <td th:text="*{battingAverage}"></td>
@@ -64,6 +87,8 @@
             <td><a th:href="@{/fielder-delete(id=*{playerId})}">削除</a></td>
         </tr>
     </table>
+    <a class="btn" th:href="@{/fielder-create}">野手追加</a>
+    <a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
 </body>
 
 </html>

@@ -8,35 +8,60 @@
 </head>
 
 <body>
-    <div class="all">
-        <h1>
-            順位
-        </h1>
-        <table class="teams" border="1">
-            <tr>
-                <th>順位</th>
-                <th>チーム名</th>
-                <th>試合数</th>
-                <th>勝ち</th>
-                <th>負け</th>
-                <th>引き分け</th>
-                <th>打率</th>
-                <th>防御率</th>
-            </tr>
-            <form th:action="@{/fielder}">
-                <tr th:each="team : ${teams}" th:object=${team}>
-                    <td th:text="*{ranking}"> </td>
-                    <td th:text="*{name}"> </td>
-                    <td th:text="*{game}"> </td>
-                    <td th:text="*{win}"> </td>
-                    <td th:text="*{lose}"> </td>
-                    <td th:text="*{draw}"> </td>
-                    <td th:text="*{battingAverage}"></td>
-                    <td th:text="*{earnedRunsAverage}"></td>
-                </tr>
-        </table>
-        <p>野手を見たいチームを選んでください</p>
-        <select type="number" name="num">
+    <h1 class="title">
+        セントラル・リーグ
+    </h1>
+    <table class="teams" border="1">
+        <tr>
+            <th>順位</th>
+            <th>チーム名</th>
+            <th>試合数</th>
+            <th>勝ち</th>
+            <th>負け</th>
+            <th>引き分け</th>
+            <th>打率</th>
+            <th>防御率</th>
+        </tr>
+        <tr th:each="team : ${teams}" th:object=${team}>
+            <td th:text="*{ranking}"> </td>
+            <td>
+                <th:brock class="rankingName" th:if="*{id} == 1">
+                    <img class="logo" th:src="@{/images/yakult.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{id} == 2">
+                    <img class="logo" th:src="@{/images/DeNA.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{id} == 3">
+                    <img class="logo" th:src="@{/images/hanshin.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{id} == 4">
+                    <img class="logo" th:src="@{/images/kyojin.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{id} == 5">
+                    <img class="logo" th:src="@{/images/hiroshima.jpg}">
+                </th:brock>
+
+                <th:brock th:if="*{id} == 6">
+                    <img class="logo" th:src="@{/images/chunichi.jpg}">
+                </th:brock>
+            </td>
+            <td th:text="*{game}"> </td>
+            <td th:text="*{win}"> </td>
+            <td th:text="*{lose}"> </td>
+            <td th:text="*{draw}"> </td>
+            <td th:text="*{battingAverage}"></td>
+            <td th:text="*{earnedRunsAverage}"></td>
+        </tr>
+    </table>
+
+    <form th:action="@{/fielder}">
+        <img class="icon" th:src="@{/images/batter.jpg}">
+        <p class="select">野手を見たいチームを選んでください</p>
+        <select class="mainSelect" type="number" name="num">
             <option value=0>全球団</option>
             <option value=1>ヤクルト</option>
             <option value=2>DeNA</option>
@@ -45,22 +70,22 @@
             <option value=5>広島</option>
             <option value=6>中日</option>
         </select>
-        <button type="submit">決定</button>
-        </form>
-        <form th:action="@{/pitcher}">
-            <p>投手を見たいチームを選んでください</p>
-            <select type="number" name="num">
-                <option value=0>全球団</option>
-                <option value=1>ヤクルト</option>
-                <option value=2>DeNA</option>
-                <option value=3>阪神</option>
-                <option value=4>巨人</option>
-                <option value=5>広島</option>
-                <option value=6>中日</option>
-            </select>
-            <button type="submit">決定</button>
-        </form>
-    </div>
+        <button class="nainSelect" type="submit">決定</button>
+    </form>
+    <form th:action="@{/pitcher}">
+        <img class="icon" th:src="@{/images/pitcher.jpg}">
+        <p class="select">投手を見たいチームを選んでください</p>
+        <select class="mainSelect" type="number" name="num">
+            <option value=0>全球団</option>
+            <option value=1>ヤクルト</option>
+            <option value=2>DeNA</option>
+            <option value=3>阪神</option>
+            <option value=4>巨人</option>
+            <option value=5>広島</option>
+            <option value=6>中日</option>
+        </select>
+        <button class="nainSelect" type="submit">決定</button>
+    </form>
 </body>
 
 </html>
