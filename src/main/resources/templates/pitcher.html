@@ -11,9 +11,9 @@
     <h1 class="title">
         投手一覧
     </h1>
-    <th:block th:if="${#lists.size(hansin) > 0}">
-        <div th:object="${hansin[0]}">
-            <p class="sortTitle">成績別でソートできます</p>
+    <th:block th:if="${#lists.size(members) > 0}">
+        <div class="sort" th:object="${members[0]}">
+            <h2 class="sortTitle">成績別でソートできます</h2>
             <a th:href="@{/pitcher-sortPitched(teamId=*{teamId})}">登板</a>
             <a th:href="@{/pitcher-sortEarnedRunsAverage(teamId=*{teamId})}">防御率</a>
             <a th:href="@{/pitcher-sortWin(teamId=*{teamId})}">勝ち</a>
@@ -43,7 +43,7 @@
             <th></th>
             <th></th>
         </tr>
-        <tr th:each="menber : ${hansin}" th:object=${menber}>
+        <tr th:each="member : ${members}" th:object=${member}>
             <td th:text="*{uniformNumber}"></td>
             <td th:text="*{name}"></td>
             <td>
@@ -83,7 +83,7 @@
             <td><a th:href="@{/pitcher-delete(id=*{playerId})}">削除</a></td>
         </tr>
     </table>
-    <a class="btn btn-primary mt-3" th:href="@{/fielder-create}">野手追加</a>
+    <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
     <a class="btn btn-primary mt-3" type="submit" th:href="@{/BaseBall}">戻る</a>
 </body>
 

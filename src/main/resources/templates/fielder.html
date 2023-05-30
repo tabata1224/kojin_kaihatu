@@ -11,9 +11,9 @@
     <h1 class="title">
         野手一覧
     </h1>
-    <th:block class="sort" th:if="${#lists.size(hansin) > 0}">
-        <div th:object="${hansin[0]}">
-            <p class="sortTitle">成績別でソートできます</p>
+    <th:block class="sort" th:if="${#lists.size(members) > 0}">
+        <div class="sort" th:object="${members[0]}">
+            <h2 class="sortTitle">成績別でソートできます</h2>
             <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
             <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
             <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
@@ -46,7 +46,7 @@
             <th></th>
         </tr>
 
-        <tr th:each="menber : ${hansin}" th:object=${menber}>
+        <tr th:each="member : ${members}" th:object=${member}>
             <td th:text="*{uniformNumber}"></td>
             <td th:text="*{name}"></td>
             <td>

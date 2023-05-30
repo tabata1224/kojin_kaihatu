@@ -10,14 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.form.EditPitcherForm;
 import com.example.demo.form.PitcherForm;
+import com.example.demo.model.CLPitcher;
 import com.example.demo.model.Pitcher;
-import com.example.demo.repository.PitcherBaseBallRepository;
+import com.example.demo.repository.CLPitcherRepository;
+import com.example.demo.repository.PitcherRepository;
 
 @Service
 @Transactional
 public class PitcherService {
     @Autowired
-    PitcherBaseBallRepository repository;
+    PitcherRepository repository;
+    @Autowired
+    CLPitcherRepository clPitcherRepository;
 
     /**
      * データベースから選手の一覧を取得する
@@ -35,7 +39,7 @@ public class PitcherService {
      * 
      * @return
      */
-    public List<Pitcher> findTeamMenber(int teamId) {
+    public List<Pitcher> findTeamMember(int teamId) {
 
         List<Pitcher> member = new ArrayList<>();
         for (Pitcher pitcher : repository.findAll()) {
@@ -81,10 +85,10 @@ public class PitcherService {
     }
 
     // 受け取ったidからデータを取得して、Formを返却する
-    public EditPitcherForm getOneFielder(Integer id) {
+    public EditPitcherForm getOnePitcher(Integer id) {
 
-        // idを指定して本の情報を取得する
-        Pitcher pitcher = repository.findById(id).get();
+        // idを指定して野手の情報を取得する
+        Pitcher pitcher = repository.findById(id).orElseThrow();
         // 画面返却用のFormに値を設定する
         EditPitcherForm editPitcher = new EditPitcherForm();
         editPitcher.setPlayerId(id);
@@ -123,5 +127,48 @@ public class PitcherService {
 
         // データベースに登録する
         repository.save(pitcher);
+    }
+
+    // 受け取ったidからデータを取得して、Formを返却する
+    public EditPitcherForm getCLOnePitcher(Integer id) {
+
+        // idを指定して野手の情報を取得する
+        CLPitcher pitcher = clPitcherRepository.findById(id).orElseThrow();
+        // 画面返却用のFormに値を設定する
+        EditPitcherForm editPitcher = new EditPitcherForm();
+        editPitcher.setPlayerId(id);
+        editPitcher.setUniformNumber(pitcher.getUniformNumber());
+        editPitcher.setName(pitcher.getName());
+        editPitcher.setPitched(pitcher.getPitched());
+        editPitcher.setEarnedRunsAverage(pitcher.getEarnedRunsAverage());
+        editPitcher.setWin(pitcher.getWin());
+        editPitcher.setLose(pitcher.getLose());
+        editPitcher.setSave(pitcher.getSave());
+        editPitcher.setHold(pitcher.getHold());
+        editPitcher.setInningsPitched(pitcher.getInningsPitched());
+        editPitcher.setStrikeOut(pitcher.getStrikeOut());
+
+        return editPitcher;
+    }
+
+    public void clUpdate(EditPitcherForm editPitcher) {
+        // データベースに登録する値を保持するインスタンス
+        CLPitcher pitcher = new CLPitcher();
+
+        // 画面から受け取った値をデータベースに保存するインスタンスに渡す
+        pitcher.setPlayerId(editPitcher.getPlayerId());
+        pitcher.setUniformNumber(editPitcher.getUniformNumber());
+        pitcher.setName(editPitcher.getName());
+        pitcher.setPitched(editPitcher.getPitched());
+        pitcher.setEarnedRunsAverage(editPitcher.getEarnedRunsAverage());
+        pitcher.setWin(editPitcher.getWin());
+        pitcher.setLose(editPitcher.getLose());
+        pitcher.setSave(editPitcher.getSave());
+        pitcher.setHold(editPitcher.getHold());
+        pitcher.setInningsPitched(editPitcher.getInningsPitched());
+        pitcher.setStrikeOut(editPitcher.getStrikeOut());
+
+        // データベースに登録する
+        clPitcherRepository.save(pitcher);
     }
 }

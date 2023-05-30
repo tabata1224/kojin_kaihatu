@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>投手登録</title>
+    <title>投手編集</title>
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-        <h1>投手を新規で登録する</h1>
-        <form th:action="@{/pitcher-create}" th:object="${pitcherForm}" method="POST">
+        <h1>投手の情報を編集する</h1>
+        <form th:action="@{/clPitcher-edit}" th:object="${editPitcherForm} " method="POST">
             <div>
                 <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
@@ -22,18 +22,7 @@
                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">name Error</p>
                 <input id="name" type="text" th:field="*{name}"><br>
             </div>
-            <div>
-                <label for="teamId">チーム</label><br>
-                <p th:if="${#fields.hasErrors('teamId')}" th:errors="*{teamId}" class="text-danger">teamId Error</p>
-                <select id="teamId" type="number" th:field="*{teamId}">
-                    <option value=1>ヤクルト</option>
-                    <option value=2>DeNA</option>
-                    <option value=3>阪神</option>
-                    <option value=4>巨人</option>
-                    <option value=5>広島</option>
-                    <option value=6>中日</option>
-                </select>
-            </div>
+
             <div>
                 <label for="pitched">登板数</label><br>
                 <p th:if="${#fields.hasErrors('pitched')}" th:errors="*{pitched}" class="text-danger">pitched Error</p>
@@ -57,7 +46,7 @@
             </div>
             <div>
                 <label for="save">セーブ</label><br>
-                <p th:if="${#fields.hasErrors('save')}" th:errors="*{save}" class="text-danger">save Error</p>
+                <p th:if="${#fields.hasErrors('save')}" th:errors="*{teamsaveId}" class="text-danger">save Error</p>
                 <input id="save" type="number" th:field="*{save}"><br>
             </div>
             <div>
@@ -77,7 +66,7 @@
                     Error</p>
                 <input id="strikeOut" type="number" th:field="*{strikeOut}"><br>
             </div>
-            <input class="register" type="submit" value="登録">
+            <input type="submit" value="更新">
         </form>
         <a type="submit" th:href="@{/BaseBall}">戻る</a>
     </div>

@@ -8,9 +8,15 @@
 </head>
 
 <body>
-    <h1 class="title">
-        セントラル・リーグ
-    </h1>
+    <div class="iconTitle">
+        <img class="mainIcon" th:src="@{/images/central.jpg}">
+        <span class="mainTitle">
+            セントラル・リーグ
+        </span>
+    </div>
+
+    <a th:href="@{/CLMember}">CL</a>
+
     <table class="teams" border="1">
         <tr>
             <th>順位</th>
@@ -27,26 +33,32 @@
             <td>
                 <th:brock class="rankingName" th:if="*{id} == 1">
                     <img class="logo" th:src="@{/images/yakult.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
 
-                <th:brock th:if="*{id} == 2">
+                <th:brock class="rankingName" th:if="*{id} == 2">
                     <img class="logo" th:src="@{/images/DeNA.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
 
-                <th:brock th:if="*{id} == 3">
+                <th:brock class="rankingName" th:if="*{id} == 3">
                     <img class="logo" th:src="@{/images/hanshin.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
 
-                <th:brock th:if="*{id} == 4">
+                <th:brock class="rankingName" th:if="*{id} == 4">
                     <img class="logo" th:src="@{/images/kyojin.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
 
-                <th:brock th:if="*{id} == 5">
+                <th:brock class="rankingName" th:if="*{id} == 5">
                     <img class="logo" th:src="@{/images/hiroshima.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
 
-                <th:brock th:if="*{id} == 6">
+                <th:brock class="rankingName" th:if="*{id} == 6">
                     <img class="logo" th:src="@{/images/chunichi.jpg}">
+                    <span class="teamName" th:text="*{name}"></span>
                 </th:brock>
             </td>
             <td th:text="*{game}"> </td>
@@ -59,8 +71,10 @@
     </table>
 
     <form th:action="@{/fielder}">
-        <img class="icon" th:src="@{/images/batter.jpg}">
-        <p class="select">野手を見たいチームを選んでください</p>
+        <div class="iconTitle">
+            <img class="icon" th:src="@{/images/batter.jpg}">
+            <span class="select">野手を見たいチームを選んでください</span>
+        </div>
         <select class="mainSelect" type="number" name="num">
             <option value=0>全球団</option>
             <option value=1>ヤクルト</option>
@@ -73,8 +87,10 @@
         <button class="nainSelect" type="submit">決定</button>
     </form>
     <form th:action="@{/pitcher}">
-        <img class="icon" th:src="@{/images/pitcher.jpg}">
-        <p class="select">投手を見たいチームを選んでください</p>
+        <div class="iconTitle">
+            <img class="icon" th:src="@{/images/pitcher.jpg}">
+            <span class="select">投手を見たいチームを選んでください</span>
+        </div>
         <select class="mainSelect" type="number" name="num">
             <option value=0>全球団</option>
             <option value=1>ヤクルト</option>
@@ -84,7 +100,7 @@
             <option value=5>広島</option>
             <option value=6>中日</option>
         </select>
-        <button class="nainSelect" type="submit">決定</button>
+        <button type="submit">決定</button>
     </form>
 </body>
 

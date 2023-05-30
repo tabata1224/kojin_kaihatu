@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Pitcher;
 
-public interface PitcherBaseBallRepository extends JpaRepository<Pitcher, Integer> {
+public interface PitcherRepository extends JpaRepository<Pitcher, Integer> {
     // 全選手を背番号で昇順
     List<Pitcher> findAllByOrderByUniformNumberAsc();
 

@@ -14,9 +14,13 @@ import com.example.demo.form.EditFielderForm;
 import com.example.demo.form.EditPitcherForm;
 import com.example.demo.form.FielderForm;
 import com.example.demo.form.PitcherForm;
+
 import com.example.demo.repository.BaseBallRepository;
-import com.example.demo.repository.FielderBaseBallRepository;
-import com.example.demo.repository.PitcherBaseBallRepository;
+import com.example.demo.repository.CLFielderRepository;
+import com.example.demo.repository.CLPitcherRepository;
+import com.example.demo.repository.FielderRepository;
+import com.example.demo.repository.PitcherRepository;
+
 import com.example.demo.service.FielderService;
 import com.example.demo.service.PitcherService;
 
@@ -25,15 +29,20 @@ public class BaseBallController {
     @Autowired
     BaseBallRepository repository;
     @Autowired
-    FielderBaseBallRepository fielderBaseBallRepository;
+    FielderRepository fielderBaseBallRepository;
     @Autowired
-    PitcherBaseBallRepository pitcherBaseBallRepository;
+    PitcherRepository pitcherBaseBallRepository;
+    @Autowired
+    CLFielderRepository clFielderRepository;
+    @Autowired
+    CLPitcherRepository clPitcherRepository;
+
     @Autowired
     FielderService fielderService;
     @Autowired
     PitcherService pitcherService;
 
-    private Integer menberId;
+    private Integer memberId;
     private Integer flagAllTeam = 1;
 
     // メイン画面を表示
@@ -50,10 +59,10 @@ public class BaseBallController {
     public String showFielder(@RequestParam("num") int teamId, Model model) {
 
         if (teamId == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByUniformNumberAsc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByUniformNumberAsc());
             this.flagAllTeam = 0;
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
             this.flagAllTeam = 1;
         }
         return "fielder";
@@ -63,10 +72,10 @@ public class BaseBallController {
     @GetMapping(path = "/pitcher")
     public String showPitcher(@RequestParam("num") int teamId, Model model) {
         if (teamId == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByUniformNumberAsc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByUniformNumberAsc());
             this.flagAllTeam = 0;
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
             this.flagAllTeam = 1;
         }
         return "pitcher";
@@ -105,7 +114,8 @@ public class BaseBallController {
 
         // fielderを登録する
         fielderService.insert(fielderForm);
-        model.addAttribute("hansin", fielderService.findTeamMenber(fielderForm.getTeamId()));
+        model.addAttribute("members",
+                fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(fielderForm.getTeamId()));
         // fielderの一覧表示画面にリダイレクト
         return "fielder";
     }
@@ -140,7 +150,7 @@ public class BaseBallController {
         }
         // pitcherを登録する
         pitcherService.insert(pitcherForm);
-        model.addAttribute("hansin", pitcherService.findTeamMenber(pitcherForm.getTeamId()));
+        model.addAttribute("members", pitcherService.findTeamMember(pitcherForm.getTeamId()));
         // pitcherの一覧表示画面にリダイレクト
         return "pitcher";
     }
@@ -148,11 +158,12 @@ public class BaseBallController {
     // 野手の削除を行う
     @GetMapping("/fielder-delete")
     public String deleteFielder(@RequestParam("id") int id, Model model) {
-        int teamId = fielderBaseBallRepository.findById(id).get().getTeamId();
+        int teamId = fielderBaseBallRepository.findById(id).orElseThrow().getTeamId();
 
         // データベースのデータを削除する
         fielderService.delete(id);
-        model.addAttribute("hansin", fielderService.findTeamMenber(teamId));
+        model.addAttribute("members",
+                fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
         // fielderの一覧表示画面にリダイレクト
         return "fielder";
     }
@@ -160,11 +171,11 @@ public class BaseBallController {
     // 投手の削除を行う
     @GetMapping("/pitcher-delete")
     public String deletePitcher(@RequestParam("id") int id, Model model) {
-        int teamId = pitcherBaseBallRepository.findById(id).get().getTeamId();
+        int teamId = pitcherBaseBallRepository.findById(id).orElseThrow().getTeamId();
 
         // データベースのデータを削除する
         pitcherService.delete(id);
-        model.addAttribute("hansin", pitcherService.findTeamMenber(teamId));
+        model.addAttribute("members", pitcherService.findTeamMember(teamId));
 
         // fielderの一覧画面にリダイレクト
         return "pitcher";
@@ -180,7 +191,7 @@ public class BaseBallController {
     @GetMapping("/fielder-edit")
     public String editFielder(@RequestParam("id") int id, Model model, EditFielderForm editFielder) {
         editFielder = fielderService.getOneFielder(id);
-        this.menberId = id;
+        this.memberId = id;
         model.addAttribute("editFielderForm", editFielder);
 
         return "editFielder";
@@ -201,10 +212,12 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editFielder";
         }
-        editFielderForm.setPlayerId(menberId);
+        editFielderForm.setPlayerId(this.memberId);
         // fielderを登録する
         fielderService.update(editFielderForm);
-        model.addAttribute("hansin", fielderService.findTeamMenber(editFielderForm.getTeamId()));
+
+        model.addAttribute("members",
+                fielderBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(editFielderForm.getTeamId()));
         // fielderの一覧表示画面にリダイレクト
         return "fielder";
     }
@@ -218,8 +231,8 @@ public class BaseBallController {
 
     @GetMapping("/pitcher-edit")
     public String editPitcher(@RequestParam("id") int id, Model model, EditPitcherForm editPitcher) {
-        editPitcher = pitcherService.getOneFielder(id);
-        this.menberId = id;
+        editPitcher = pitcherService.getOnePitcher(id);
+        this.memberId = id;
         model.addAttribute("editPitcherForm", editPitcher);
         return "editPitcher";
     }
@@ -239,11 +252,12 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editPitcher";
         }
-        editPitcherForm.setPlayerId(menberId);
+        editPitcherForm.setPlayerId(this.memberId);
         // pitcherを登録する
         pitcherService.update(editPitcherForm);
 
-        model.addAttribute("hansin", pitcherService.findTeamMenber(editPitcherForm.getTeamId()));
+        model.addAttribute("members",
+                pitcherBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(editPitcherForm.getTeamId()));
 
         // pitcherの一覧表示画面にリダイレクト
         return "pitcher";
@@ -254,9 +268,9 @@ public class BaseBallController {
     public String fielderSortOrder(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByOrderNumAsc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByOrderNumAsc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByOrderNumAsc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByOrderNumAsc(teamId));
         }
         return "fielder";
     }
@@ -266,9 +280,9 @@ public class BaseBallController {
     public String fielderSortAattingAverage(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByBattingAverageDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByBattingAverageDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByBattingAverageDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByBattingAverageDesc(teamId));
         }
         return "fielder";
     }
@@ -278,9 +292,9 @@ public class BaseBallController {
     public String fielderSortHit(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByHitDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByHitDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByHitDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByHitDesc(teamId));
         }
         return "fielder";
     }
@@ -290,9 +304,9 @@ public class BaseBallController {
     public String fielderSortDoubleHit(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByDoubleHitDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByDoubleHitDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByDoubleHitDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByDoubleHitDesc(teamId));
         }
         return "fielder";
     }
@@ -302,9 +316,9 @@ public class BaseBallController {
     public String fielderSortThreeHit(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByThreeHitDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByThreeHitDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByThreeHitDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByThreeHitDesc(teamId));
         }
         return "fielder";
     }
@@ -314,9 +328,9 @@ public class BaseBallController {
     public String fielderSortHomerun(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByHomerunDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByHomerunDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByHomerunDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByHomerunDesc(teamId));
         }
         return "fielder";
     }
@@ -326,9 +340,9 @@ public class BaseBallController {
     public String fielderSortRunBattedIn(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByRunBattedInDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByRunBattedInDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByRunBattedInDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByRunBattedInDesc(teamId));
         }
         return "fielder";
     }
@@ -338,9 +352,9 @@ public class BaseBallController {
     public String fielderSortBaseStealingIn(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", fielderBaseBallRepository.findAllByOrderByBaseStealingDesc());
+            model.addAttribute("members", fielderBaseBallRepository.findAllByOrderByBaseStealingDesc());
         } else {
-            model.addAttribute("hansin", fielderBaseBallRepository.findByTeamIdOrderByBaseStealingDesc(teamId));
+            model.addAttribute("members", fielderBaseBallRepository.findByTeamIdOrderByBaseStealingDesc(teamId));
         }
         return "fielder";
     }
@@ -350,9 +364,9 @@ public class BaseBallController {
     public String pitcherSortPitched(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByPitchedDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByPitchedDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByPitchedDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByPitchedDesc(teamId));
         }
         return "pitcher";
     }
@@ -362,9 +376,9 @@ public class BaseBallController {
     public String pitcherSortEarnedRunsAverage(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByEarnedRunsAverageAsc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByEarnedRunsAverageAsc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByEarnedRunsAverageAsc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByEarnedRunsAverageAsc(teamId));
         }
         return "pitcher";
     }
@@ -374,9 +388,9 @@ public class BaseBallController {
     public String pitcherSortWin(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByWinDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByWinDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByWinDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByWinDesc(teamId));
         }
         return "pitcher";
     }
@@ -386,9 +400,9 @@ public class BaseBallController {
     public String pitcherSortLose(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByLoseDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByLoseDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByLoseDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByLoseDesc(teamId));
         }
         return "pitcher";
     }
@@ -398,9 +412,9 @@ public class BaseBallController {
     public String pitcherSortSave(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderBySaveDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderBySaveDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderBySaveDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderBySaveDesc(teamId));
         }
         return "pitcher";
     }
@@ -410,9 +424,9 @@ public class BaseBallController {
     public String pitcherSortHold(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByHoldDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByHoldDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByHoldDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByHoldDesc(teamId));
         }
         return "pitcher";
     }
@@ -422,9 +436,9 @@ public class BaseBallController {
     public String pitcherSortInningsPitched(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByInningsPitchedDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByInningsPitchedDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByInningsPitchedDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByInningsPitchedDesc(teamId));
         }
         return "pitcher";
     }
@@ -434,10 +448,100 @@ public class BaseBallController {
     public String pitcherSortStrikeOutDesc(@RequestParam("teamId") int teamId, Model model) {
 
         if (this.flagAllTeam == 0) {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findAllByOrderByStrikeOutDesc());
+            model.addAttribute("members", pitcherBaseBallRepository.findAllByOrderByStrikeOutDesc());
         } else {
-            model.addAttribute("hansin", pitcherBaseBallRepository.findByTeamIdOrderByStrikeOutDesc(teamId));
+            model.addAttribute("members", pitcherBaseBallRepository.findByTeamIdOrderByStrikeOutDesc(teamId));
         }
         return "pitcher";
+    }
+
+    // CLメンバーを表示
+    @GetMapping(path = "/CLMember")
+    public String showCLMember(Model model) {
+        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
+        return "clMember";
+    }
+
+    /**
+     * CL野手更新画面を表示
+     * 
+     * @param model
+     * @return 更新画面
+     */
+
+    @GetMapping("/clFielder-edit")
+    public String editCLFielder(@RequestParam("id") int id, Model model, EditFielderForm editFielder) {
+        editFielder = fielderService.getCLOneFielder(id);
+        this.memberId = id;
+        model.addAttribute("editFielderForm", editFielder);
+
+        return "editCLFielder";
+    }
+
+    /**
+     * CLfielderデータベースにを登録する
+     * 
+     * @param editFielderForm
+     * @param model
+     * @return
+     */
+    @PostMapping("/clFielder-edit")
+    public String saveCLEditFielder(@ModelAttribute @Validated EditFielderForm editFielderForm, BindingResult result,
+            Model model) {
+        // バリデーションエラーの場合
+        if (result.hasErrors()) {
+            // 新規登録画面に遷移
+            return "editCLFielder";
+        }
+        editFielderForm.setPlayerId(memberId);
+        // fielderを登録する
+        fielderService.CLUpdate(editFielderForm);
+
+        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
+        // fielderの一覧表示画面にリダイレクト
+        return "clMember";
+    }
+
+    /**
+     * CL投手更新画面を表示
+     * 
+     * @param model
+     * @return 更新画面
+     */
+
+    @GetMapping("/clPitcher-edit")
+    public String editCLPitcher(@RequestParam("id") int id, Model model, EditPitcherForm editPitcher) {
+        editPitcher = pitcherService.getCLOnePitcher(id);
+        this.memberId = id;
+        model.addAttribute("editPitcherForm", editPitcher);
+        return "editCLPitcher";
+    }
+
+    /**
+     * pitcherデータベースにを登録する
+     * 
+     * @param editPitcherForm
+     * @param
+     * 
+     */
+    @PostMapping("/clPitcher-edit")
+    public String saveCLEditPitcher(@ModelAttribute @Validated EditPitcherForm editPitcherForm, BindingResult result,
+            Model model) {
+        // バリデーションエラーの場合
+        if (result.hasErrors()) {
+            // 新規登録画面に遷移
+            return "editCLPitcher";
+        }
+        editPitcherForm.setPlayerId(memberId);
+        // pitcherを登録する
+        pitcherService.clUpdate(editPitcherForm);
+
+        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
+
+        // pitcherの一覧表示画面にリダイレクト
+        return "clMember";
     }
 }

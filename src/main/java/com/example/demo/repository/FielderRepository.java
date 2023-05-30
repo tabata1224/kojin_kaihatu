@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Fielder;
 
-public interface FielderBaseBallRepository extends JpaRepository<Fielder, Integer> {
+public interface FielderRepository extends JpaRepository<Fielder, Integer> {
     // 全選手を背番号で昇順
     List<Fielder> findAllByOrderByUniformNumberAsc();
 
