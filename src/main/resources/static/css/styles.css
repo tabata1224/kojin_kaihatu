@@ -2,7 +2,7 @@ html {
     background-color: rgb(27, 25, 25);
     text-align: center;
     color: rgb(245, 245, 238);
-    font-family: 'Noto Serif JP', sans-serif;
+    font-family: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', '游明朝', 'Yu Mincho', '游明朝体', 'YuMincho', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
 }
 
 .teams {
@@ -138,7 +138,6 @@ select {
     color: rgb(245, 245, 238);
     border-radius: 5px;
 }
-
 
 /*↓マウスオーバー時の変化。ここでは背景色だけ変更*/
 input:hover {
