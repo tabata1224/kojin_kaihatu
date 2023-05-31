@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -33,22 +33,22 @@ public class PitcherService {
         return repository.findAll();
     }
 
-    /**
-     * データベースからチームIDに一致する選手の一覧を取得する
-     * 9
-     * 
-     * @return
-     */
-    public List<Pitcher> findTeamMember(int teamId) {
+    // /**
+    // * データベースからチームIDに一致する選手の一覧を取得する
+    // * 9
+    // *
+    // * @return
+    // */
+    // public List<Pitcher> findTeamMember(int teamId) {
 
-        List<Pitcher> member = new ArrayList<>();
-        for (Pitcher pitcher : repository.findAll()) {
-            if (teamId == pitcher.getTeamId()) {
-                member.add(pitcher);
-            }
-        }
-        return member;
-    }
+    // List<Pitcher> member = new ArrayList<>();
+    // for (Pitcher pitcher : repository.findAll()) {
+    // if (teamId == pitcher.getTeamId()) {
+    // member.add(pitcher);
+    // }
+    // }
+    // return member;
+    // }
 
     /**
      * データベースにデータを登録する

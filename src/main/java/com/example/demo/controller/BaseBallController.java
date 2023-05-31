@@ -150,7 +150,8 @@ public class BaseBallController {
         }
         // pitcherを登録する
         pitcherService.insert(pitcherForm);
-        model.addAttribute("members", pitcherService.findTeamMember(pitcherForm.getTeamId()));
+        model.addAttribute("members",
+                pitcherBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(pitcherForm.getTeamId()));
         // pitcherの一覧表示画面にリダイレクト
         return "pitcher";
     }
@@ -175,7 +176,9 @@ public class BaseBallController {
 
         // データベースのデータを削除する
         pitcherService.delete(id);
-        model.addAttribute("members", pitcherService.findTeamMember(teamId));
+
+        model.addAttribute("members",
+                pitcherBaseBallRepository.findByTeamIdOrderByUniformNumberAsc(teamId));
 
         // fielderの一覧画面にリダイレクト
         return "pitcher";
@@ -458,7 +461,7 @@ public class BaseBallController {
     // CLメンバーを表示
     @GetMapping(path = "/CLMember")
     public String showCLMember(Model model) {
-        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("members", clFielderRepository.findAllByOrderByOrderNumAsc());
         model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
         return "clMember";
     }
@@ -498,7 +501,7 @@ public class BaseBallController {
         // fielderを登録する
         fielderService.CLUpdate(editFielderForm);
 
-        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("members", clFielderRepository.findAllByOrderByOrderNumAsc());
         model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
         // fielderの一覧表示画面にリダイレクト
         return "clMember";
@@ -538,7 +541,7 @@ public class BaseBallController {
         // pitcherを登録する
         pitcherService.clUpdate(editPitcherForm);
 
-        model.addAttribute("members", clFielderRepository.findAllByOrderByUniformNumberAsc());
+        model.addAttribute("members", clFielderRepository.findAllByOrderByOrderNumAsc());
         model.addAttribute("pitcher", clPitcherRepository.findAllByOrderByUniformNumberAsc());
 
         // pitcherの一覧表示画面にリダイレクト
