@@ -8,9 +8,10 @@
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
     <div class="container">
         <h1>野手の情報を編集する</h1>
-        <form th:action="@{/fielder-edit}" th:object="${editFielderForm} " method="POST">
+        <form th:action="@{/fielder-edit}" th:object="${editFielderForm} " method="POST" name="clickedFielder">
             <div>
                 <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
@@ -104,7 +105,7 @@
                     baseStealing Error</p>
                 <input id="baseStealing" type="number" th:field="*{baseStealing}"><br>
             </div>
-            <input type="submit" value="更新">
+            <input type="submit" value="更新" onclick="clickedFieldAdd()">
         </form>
         <a type="submit" th:href="@{/BaseBall}">戻る</a>
     </div>

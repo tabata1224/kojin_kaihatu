@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
     <h1 class="title">
         投手一覧
     </h1>
@@ -80,7 +81,7 @@
             <td th:text="*{inningsPitched}"></td>
             <td th:text="*{strikeOut}"></td>
             <td><a th:href="@{/pitcher-edit(id=*{playerId})}">編集</a></td>
-            <td><a th:href="@{/pitcher-delete(id=*{playerId})}">削除</a></td>
+            <td><a th:href="@{/pitcher-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
         </tr>
     </table>
     <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>

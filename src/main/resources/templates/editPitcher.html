@@ -8,9 +8,11 @@
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
+
     <div class="container">
         <h1>投手の情報を編集する</h1>
-        <form th:action="@{/pitcher-edit}" th:object="${editPitcherForm} " method="POST">
+        <form th:action="@{/pitcher-edit}" th:object="${editPitcherForm} " method="POST" name="clickedPitcher">
             <div>
                 <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
@@ -77,7 +79,7 @@
                     Error</p>
                 <input id="strikeOut" type="number" th:field="*{strikeOut}"><br>
             </div>
-            <input type="submit" value="更新">
+            <input type="submit" value="更新" onclick="clickedPitcherAdd()">
         </form>
         <a type="submit" th:href="@{/BaseBall}">戻る</a>
     </div>

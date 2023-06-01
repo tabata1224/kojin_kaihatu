@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
     <h1 class="title">
         野手一覧
     </h1>
@@ -84,7 +85,7 @@
             <td th:text="*{runBattedIn}"></td>
             <td th:text="*{baseStealing}"></td>
             <td><a th:href="@{/fielder-edit(id=*{playerId})}">編集</a></td>
-            <td><a th:href="@{/fielder-delete(id=*{playerId})}">削除</a></td>
+            <td><a th:href="@{/fielder-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
         </tr>
     </table>
     <a class="btn" th:href="@{/fielder-create}">野手追加</a>

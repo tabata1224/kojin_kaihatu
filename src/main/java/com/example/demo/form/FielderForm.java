@@ -22,8 +22,8 @@ public class FielderForm {
 
     private Integer position;
 
-    @Max(value = 1, message = "1 ~ 0の値を入力してください")
-    @Min(value = 0, message = "1 ~ 0の値を入力してください")
+    @Max(value = 1, message = "0 ~ 1の値を入力してください")
+    @Min(value = 0, message = "0 ~ 1の値を入力してください")
     private double battingAverage;
 
     @NotNull(message = "入力してください")

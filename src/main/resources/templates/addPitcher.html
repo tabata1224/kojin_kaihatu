@@ -8,11 +8,12 @@
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
     <div class="container">
         <h1>投手を新規で登録する</h1>
-        <form th:action="@{/pitcher-create}" th:object="${pitcherForm}" method="POST">
+        <form th:action="@{/pitcher-create}" th:object="${pitcherForm}" method="POST" name="clickedPitcher">
             <div>
-                <label for="uniformNumber">背番号</label><br>
+                <label for=" uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
                     uniformNumber Error</p>
                 <input id="uniformNumber" type="number" th:field="*{uniformNumber}"><br>
@@ -42,7 +43,8 @@
             <div>
                 <label for="earnedRunsAverage">防御率</label><br>
                 <p th:if="${#fields.hasErrors('earnedRunsAverage')}" th:errors="*{earnedRunsAverage}"
-                    class="text-danger">earnedRunsAverage Error</p>
+                    class="text-danger">
+                    earnedRunsAverage Error</p>
                 <input id="earnedRunsAverage" type="number" step="0.01" th:field="*{earnedRunsAverage}"><br>
             </div>
             <div>
@@ -77,7 +79,7 @@
                     Error</p>
                 <input id="strikeOut" type="number" th:field="*{strikeOut}"><br>
             </div>
-            <input class="register" type="submit" value="登録">
+            <input class="register" type="submit" value="登録" onclick="clickedPitcherAdd()">
         </form>
         <a type="submit" th:href="@{/BaseBall}">戻る</a>
     </div>

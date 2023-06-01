@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>野球データベース</title>
+    <title>プロ野球野球データベース2022年</title>
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
 <body>
+    <script th:src="@{/js/test.js}"></script>
+
     <div class="iconTitle">
         <img class="mainIcon" th:src="@{/images/central.jpg}">
         <span class="mainTitle">
-            セントラル・リーグ（<a class="CL" th:href="@{/CLMember}">CL</a>）
+            セントラル・リーグ（<a class="CL" th:href="@{/CLMember}" onclick="clicked()">CL</a>）
         </span>
     </div>
-
 
     <table class="teams" border="1">
         <tr>
