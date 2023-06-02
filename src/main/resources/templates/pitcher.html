@@ -7,85 +7,115 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
-<body>
-    <script th:src="@{/js/test.js}"></script>
-    <h1 class="title">
-        投手一覧
-    </h1>
-    <th:block th:if="${#lists.size(members) > 0}">
-        <div class="sort" th:object="${members[0]}">
-            <h2 class="sortTitle">成績別でソートできます</h2>
-            <a th:href="@{/pitcher-sortPitched(teamId=*{teamId})}">登板</a>
-            <a th:href="@{/pitcher-sortEarnedRunsAverage(teamId=*{teamId})}">防御率</a>
-            <a th:href="@{/pitcher-sortWin(teamId=*{teamId})}">勝ち</a>
-            <a th:href="@{/pitcher-sortLose(teamId=*{teamId})}">負け</a>
-            <a th:href="@{/pitcher-sortSave(teamId=*{teamId})}">セーブ</a>
-            <a th:href="@{/pitcher-sortHold(teamId=*{teamId})}">ホールド</a>
-            <a th:href="@{/pitcher-sortInningsPitched(teamId=*{teamId})}">投球回</a>
-            <a th:href="@{/pitcher-sortStrikeOut(teamId=*{teamId})}">奪三振</a>
-            <br>
-        </div>
+<div th:object="${members[0]}">
+    <th:block th:if="*{teamId} == 1">
+
+        <body class="yakuruto">
     </th:block>
-    <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
-    <a class="btn btn-primary mt-3" type="submit" th:href="@{/BaseBall}">戻る</a>
-    <table class="teams" border="1">
-        <tr>
-            <th>背番号</th>
-            <th>名前</th>
-            <th>チーム</th>
-            <th>登板数</th>
-            <th>防御率</th>
-            <th>勝ち</th>
-            <th>負け</th>
-            <th>セーブ</th>
-            <th>ホールド</th>
-            <th>投球回</th>
-            <th>奪三振</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr th:each="member : ${members}" th:object=${member}>
-            <td th:text="*{uniformNumber}"></td>
-            <td th:text="*{name}"></td>
-            <td>
-                <th:brock th:if="*{teamId} == 1">
-                    <img class="logo" th:src="@{/images/yakult.jpg}">
-                </th:brock>
 
-                <th:brock th:if="*{teamId} == 2">
-                    <img class="logo" th:src="@{/images/DeNA.jpg}">
-                </th:brock>
+    <th:block th:if="*{teamId} == 2">
 
-                <th:brock th:if="*{teamId} == 3">
-                    <img class="logo" th:src="@{/images/hanshin.jpg}">
-                </th:brock>
+        <body class="yokohama">
+    </th:block>
 
-                <th:brock th:if="*{teamId} == 4">
-                    <img class="logo" th:src="@{/images/kyojin.jpg}">
-                </th:brock>
+    <th:block th:if="*{teamId} == 3">
 
-                <th:brock th:if="*{teamId} == 5">
-                    <img class="logo" th:src="@{/images/hiroshima.jpg}">
-                </th:brock>
+        <body class="hanshin">
+    </th:block>
 
-                <th:brock th:if="*{teamId} == 6">
-                    <img class="logo" th:src="@{/images/chunichi.jpg}">
-                </th:brock>
-            </td>
-            <td th:text="*{pitched}"></td>
-            <td th:text="*{earnedRunsAverage}"></td>
-            <td th:text="*{win}"></td>
-            <td th:text="*{lose}"></td>
-            <td th:text="*{save}"></td>
-            <td th:text="*{hold}"></td>
-            <td th:text="*{inningsPitched}"></td>
-            <td th:text="*{strikeOut}"></td>
-            <td><a th:href="@{/pitcher-edit(id=*{playerId})}">編集</a></td>
-            <td><a th:href="@{/pitcher-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
-        </tr>
-    </table>
-    <a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
-    <a class="btn btn-primary mt-3" type="submit" th:href="@{/BaseBall}">戻る</a>
+    <th:block th:if="*{teamId} == 4">
+
+        <body class="kyojin">
+    </th:block>
+
+    <th:block th:if="*{teamId} == 5">
+
+        <body class="hiroshima">
+    </th:block>
+
+    <th:block th:if="*{teamId} == 6">
+
+        <body class="chunichi">
+    </th:block>
+</div>
+<script th:src="@{/js/test.js}"></script>
+<h1 class="title">
+    投手一覧
+</h1>
+<th:block th:if="${#lists.size(members) > 0}">
+    <div class="sort" th:object="${members[0]}">
+        <h2 class="sortTitle">成績別でソートできます</h2>
+        <a th:href="@{/pitcher-sortPitched(teamId=*{teamId})}">登板</a>
+        <a th:href="@{/pitcher-sortEarnedRunsAverage(teamId=*{teamId})}">防御率</a>
+        <a th:href="@{/pitcher-sortWin(teamId=*{teamId})}">勝ち</a>
+        <a th:href="@{/pitcher-sortLose(teamId=*{teamId})}">負け</a>
+        <a th:href="@{/pitcher-sortSave(teamId=*{teamId})}">セーブ</a>
+        <a th:href="@{/pitcher-sortHold(teamId=*{teamId})}">ホールド</a>
+        <a th:href="@{/pitcher-sortInningsPitched(teamId=*{teamId})}">投球回</a>
+        <a th:href="@{/pitcher-sortStrikeOut(teamId=*{teamId})}">奪三振</a>
+        <br>
+    </div>
+</th:block>
+<a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
+<a class="btn btn-primary mt-3" type="submit" th:href="@{/BaseBall}">戻る</a>
+<table class="teams" border="1">
+    <tr>
+        <th>背番号</th>
+        <th>名前</th>
+        <th>チーム</th>
+        <th>登板数</th>
+        <th>防御率</th>
+        <th>勝ち</th>
+        <th>負け</th>
+        <th>セーブ</th>
+        <th>ホールド</th>
+        <th>投球回</th>
+        <th>奪三振</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="member : ${members}" th:object=${member}>
+        <td th:text="*{uniformNumber}"></td>
+        <td th:text="*{name}"></td>
+        <td>
+            <th:brock th:if="*{teamId} == 1">
+                <img class="logo" th:src="@{/images/yakult.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 2">
+                <img class="logo" th:src="@{/images/DeNA.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 3">
+                <img class="logo" th:src="@{/images/hanshin.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 4">
+                <img class="logo" th:src="@{/images/kyojin.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 5">
+                <img class="logo" th:src="@{/images/hiroshima.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 6">
+                <img class="logo" th:src="@{/images/chunichi.jpg}">
+            </th:brock>
+        </td>
+        <td th:text="*{pitched}"></td>
+        <td th:text="*{earnedRunsAverage}"></td>
+        <td th:text="*{win}"></td>
+        <td th:text="*{lose}"></td>
+        <td th:text="*{save}"></td>
+        <td th:text="*{hold}"></td>
+        <td th:text="*{inningsPitched}"></td>
+        <td th:text="*{strikeOut}"></td>
+        <td><a th:href="@{/pitcher-edit(id=*{playerId})}">編集</a></td>
+        <td><a th:href="@{/pitcher-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
+    </tr>
+</table>
+<a class="btn btn-primary mt-3" th:href="@{/pitcher-create}">投手追加</a>
+<a class="btn btn-primary mt-3" type="submit" th:href="@{/BaseBall}">戻る</a>
 </body>
 
 </html>

@@ -42,7 +42,6 @@ public class BaseBallController {
     @Autowired
     PitcherService pitcherService;
 
-    private Integer memberId;
     private Integer flagAllTeam = 1;
 
     // メイン画面を表示
@@ -194,7 +193,6 @@ public class BaseBallController {
     @GetMapping("/fielder-edit")
     public String editFielder(@RequestParam("id") int id, Model model, EditFielderForm editFielder) {
         editFielder = fielderService.getOneFielder(id);
-        this.memberId = id;
         model.addAttribute("editFielderForm", editFielder);
 
         return "editFielder";
@@ -215,7 +213,6 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editFielder";
         }
-        editFielderForm.setPlayerId(this.memberId);
         // fielderを登録する
         fielderService.update(editFielderForm);
 
@@ -235,7 +232,6 @@ public class BaseBallController {
     @GetMapping("/pitcher-edit")
     public String editPitcher(@RequestParam("id") int id, Model model, EditPitcherForm editPitcher) {
         editPitcher = pitcherService.getOnePitcher(id);
-        this.memberId = id;
         model.addAttribute("editPitcherForm", editPitcher);
         return "editPitcher";
     }
@@ -255,7 +251,6 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editPitcher";
         }
-        editPitcherForm.setPlayerId(this.memberId);
         // pitcherを登録する
         pitcherService.update(editPitcherForm);
 
@@ -476,7 +471,6 @@ public class BaseBallController {
     @GetMapping("/clFielder-edit")
     public String editCLFielder(@RequestParam("id") int id, Model model, EditFielderForm editFielder) {
         editFielder = fielderService.getCLOneFielder(id);
-        this.memberId = id;
         model.addAttribute("editFielderForm", editFielder);
 
         return "editCLFielder";
@@ -497,7 +491,6 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editCLFielder";
         }
-        editFielderForm.setPlayerId(memberId);
         // fielderを登録する
         fielderService.CLUpdate(editFielderForm);
 
@@ -517,7 +510,6 @@ public class BaseBallController {
     @GetMapping("/clPitcher-edit")
     public String editCLPitcher(@RequestParam("id") int id, Model model, EditPitcherForm editPitcher) {
         editPitcher = pitcherService.getCLOnePitcher(id);
-        this.memberId = id;
         model.addAttribute("editPitcherForm", editPitcher);
         return "editCLPitcher";
     }
@@ -537,7 +529,6 @@ public class BaseBallController {
             // 新規登録画面に遷移
             return "editCLPitcher";
         }
-        editPitcherForm.setPlayerId(memberId);
         // pitcherを登録する
         pitcherService.clUpdate(editPitcherForm);
 

@@ -1,8 +1,13 @@
-html {
+/* html {
+    margin: 50px 0 50px 0;
     background-color: rgb(27, 25, 25);
     text-align: center;
     color: rgb(245, 245, 238);
     font-family: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', '游明朝', 'Yu Mincho', '游明朝体', 'YuMincho', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
+} */
+
+h1 {
+    margin-top: 50px;
 }
 
 .teams {
@@ -153,4 +158,42 @@ button:hover {
 select:hover {
     background-color: rgb(245, 245, 238);
     color: rgb(27, 25, 25)
+}
+
+body {
+    margin: 50px 0 50px 0;
+    background-color: rgb(27, 25, 25);
+    text-align: center;
+    color: rgb(245, 245, 238);
+    font-family: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', '游明朝', 'Yu Mincho', '游明朝体', 'YuMincho', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
+}
+
+.yakuruto {
+    background-size: cover;
+    background-image: url(../images/jingu.jpg);
+}
+
+.yokohama {
+    background-size: cover;
+    background-image: url(../images/hamasuta.jpg);
+}
+
+.hanshin {
+    background-size: cover;
+    background-image: url(../images/koshien.jpg);
+}
+
+.kyojin {
+    background-size: cover;
+    background-image: url(../images/tokyodome.jpg);
+}
+
+.hiroshima {
+    background-size: cover;
+    background-image: url(../images/matsuda.jpg);
+}
+
+.chunichi {
+    background-size: cover;
+    background-image: url(../images/banterin.jpg);
 }

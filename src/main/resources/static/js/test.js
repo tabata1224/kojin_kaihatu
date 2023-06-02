@@ -12,11 +12,11 @@ function clickedFieldAdd() {
         return false;
     }
     else if (clickedFielder.uniformNumber.value < 0
-        || clickedFielder.battingAverage.value < 0 || clickedFielder.hit.value < 0
+        || clickedFielder.battingAverage.value < 0 || 1 < clickedFielder.battingAverage.value || clickedFielder.hit.value < 0
         || clickedFielder.doubleHit.value < 0 || clickedFielder.threeHit.value < 0
         || clickedFielder.homerun.value < 0 || clickedFielder.runBattedIn.value < 0 ||
         clickedFielder.baseStealing.value < 0) {
-        alert("負の値の項目があります");
+        alert("適していない値の項目があります");
         return false;
     }
     else {
@@ -39,7 +39,7 @@ function clickedPitcherAdd() {
         || clickedPitcher.win.value < 0 || clickedPitcher.lose.value < 0
         || clickedPitcher.save.value < 0 || clickedPitcher.hold.value < 0 ||
         clickedPitcher.inningsPitched.value < 0 || clickedPitcher.strikeOut.value < 0) {
-        alert("負の値の項目があります");
+        alert("適していない値の項目があります");
         return false;
     }
     else {
@@ -63,3 +63,4 @@ function check() {
     }
 
 }
+

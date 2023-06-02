@@ -7,89 +7,120 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
-<body>
-    <script th:src="@{/js/test.js}"></script>
-    <h1 class="title">
-        野手一覧
-    </h1>
-    <th:block class="sort" th:if="${#lists.size(members) > 0}">
-        <div class="sort" th:object="${members[0]}">
-            <h2 class="sortTitle">成績別でソートできます</h2>
-            <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
-            <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
-            <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
-            <a th:href="@{/fielder-sortDoubleHit(teamId=*{teamId})}">二塁打</a>
-            <a th:href="@{/fielder-sortThreeHit(teamId=*{teamId})}">三塁打</a>
-            <a th:href="@{/fielder-sortHomerun(teamId=*{teamId})}">本塁打</a>
-            <a th:href="@{/fielder-sortRunBattedIn(teamId=*{teamId})}">打点</a>
-            <a th:href="@{/fielder-sortBaseStealing(teamId=*{teamId})}">盗塁</a>
-            <br>
-        </div>
+<div th:object="${members[0]}">
+    <th:block th:if="*{teamId} == 1">
+
+        <body class="yakuruto">
     </th:block>
-    <a class="btn" th:href="@{/fielder-create}">野手追加</a>
-    <a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
 
-    <table class="teams" border="1">
-        <tr>
-            <th>背番号</th>
-            <th>名前</th>
-            <th>チーム</th>
-            <th>打順</th>
-            <th>ポジション</th>
-            <th>打率</th>
-            <th>安打</th>
-            <th>二塁打</th>
-            <th>三塁打</th>
-            <th>本塁打</th>
-            <th>打点</th>
-            <th>盗塁</th>
-            <th></th>
-            <th></th>
-        </tr>
+    <th:block th:if="*{teamId} == 2">
 
-        <tr th:each="member : ${members}" th:object=${member}>
-            <td th:text="*{uniformNumber}"></td>
-            <td th:text="*{name}"></td>
-            <td>
-                <th:brock th:if="*{teamId} == 1">
-                    <img class="logo" th:src="@{/images/yakult.jpg}">
-                </th:brock>
+        <body class="yokohama">
+    </th:block>
 
-                <th:brock th:if="*{teamId} == 2">
-                    <img class="logo" th:src="@{/images/DeNA.jpg}">
-                </th:brock>
+    <th:block th:if="*{teamId} == 3">
 
-                <th:brock th:if="*{teamId} == 3">
-                    <img class="logo" th:src="@{/images/hanshin.jpg}">
-                </th:brock>
+        <body class="hanshin">
+    </th:block>
 
-                <th:brock th:if="*{teamId} == 4">
-                    <img class="logo" th:src="@{/images/kyojin.jpg}">
-                </th:brock>
+    <th:block th:if="*{teamId} == 4">
 
-                <th:brock th:if="*{teamId} == 5">
-                    <img class="logo" th:src="@{/images/hiroshima.jpg}">
-                </th:brock>
+        <body class="kyojin">
+    </th:block>
 
-                <th:brock th:if="*{teamId} == 6">
-                    <img class="logo" th:src="@{/images/chunichi.jpg}">
-                </th:brock>
-            </td>
-            <td th:text="*{orderNum}"></td>
-            <td th:text="*{position}"></td>
-            <td th:text="*{battingAverage}"></td>
-            <td th:text="*{hit}"></td>
-            <td th:text="*{doubleHit}"></td>
-            <td th:text="*{threeHit}"></td>
-            <td th:text="*{homerun}"></td>
-            <td th:text="*{runBattedIn}"></td>
-            <td th:text="*{baseStealing}"></td>
-            <td><a th:href="@{/fielder-edit(id=*{playerId})}">編集</a></td>
-            <td><a th:href="@{/fielder-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
-        </tr>
-    </table>
-    <a class="btn" th:href="@{/fielder-create}">野手追加</a>
-    <a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
+    <th:block th:if="*{teamId} == 5">
+
+        <body class="hiroshima">
+    </th:block>
+
+    <th:block th:if="*{teamId} == 6">
+
+        <body class="chunichi">
+    </th:block>
+</div>
+
+<script th:src="@{/js/test.js}"></script>
+<h1 class="title">
+    野手一覧
+</h1>
+<th:block class="sort" th:if="${#lists.size(members) > 0}">
+    <div class="sort" th:object="${members[0]}">
+        <h2 class="sortTitle">成績別でソートできます</h2>
+        <a th:href="@{/fielder-sortOrder(teamId=*{teamId})}">打順</a>
+        <a th:href="@{/fielder-sortBattingAverage(teamId=*{teamId})}">打率</a>
+        <a th:href="@{/fielder-sortHit(teamId=*{teamId})}">安打</a>
+        <a th:href="@{/fielder-sortDoubleHit(teamId=*{teamId})}">二塁打</a>
+        <a th:href="@{/fielder-sortThreeHit(teamId=*{teamId})}">三塁打</a>
+        <a th:href="@{/fielder-sortHomerun(teamId=*{teamId})}">本塁打</a>
+        <a th:href="@{/fielder-sortRunBattedIn(teamId=*{teamId})}">打点</a>
+        <a th:href="@{/fielder-sortBaseStealing(teamId=*{teamId})}">盗塁</a>
+        <br>
+    </div>
+</th:block>
+<a class="btn" th:href="@{/fielder-create}">野手追加</a>
+<a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
+
+<table class="teams" border="1">
+    <tr>
+        <th>背番号</th>
+        <th>名前</th>
+        <th>チーム</th>
+        <th>打順</th>
+        <th>ポジション</th>
+        <th>打率</th>
+        <th>安打</th>
+        <th>二塁打</th>
+        <th>三塁打</th>
+        <th>本塁打</th>
+        <th>打点</th>
+        <th>盗塁</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <tr th:each="member : ${members}" th:object=${member}>
+        <td th:text="*{uniformNumber}"></td>
+        <td th:text="*{name}"></td>
+        <td>
+            <th:brock th:if="*{teamId} == 1">
+                <img class="logo" th:src="@{/images/yakult.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 2">
+                <img class="logo" th:src="@{/images/DeNA.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 3">
+                <img class="logo" th:src="@{/images/hanshin.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 4">
+                <img class="logo" th:src="@{/images/kyojin.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 5">
+                <img class="logo" th:src="@{/images/hiroshima.jpg}">
+            </th:brock>
+
+            <th:brock th:if="*{teamId} == 6">
+                <img class="logo" th:src="@{/images/chunichi.jpg}">
+            </th:brock>
+        </td>
+        <td th:text="*{orderNum}"></td>
+        <td th:text="*{position}"></td>
+        <td th:text="*{battingAverage}"></td>
+        <td th:text="*{hit}"></td>
+        <td th:text="*{doubleHit}"></td>
+        <td th:text="*{threeHit}"></td>
+        <td th:text="*{homerun}"></td>
+        <td th:text="*{runBattedIn}"></td>
+        <td th:text="*{baseStealing}"></td>
+        <td><a th:href="@{/fielder-edit(id=*{playerId})}">編集</a></td>
+        <td><a th:href="@{/fielder-delete(id=*{playerId})}" onclick="return check()">削除</a></td>
+    </tr>
+</table>
+<a class="btn" th:href="@{/fielder-create}">野手追加</a>
+<a class="btn" type="submit" th:href="@{/BaseBall}">戻る</a>
 </body>
 
 </html>

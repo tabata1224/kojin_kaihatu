@@ -108,24 +108,24 @@ public class FielderService {
         return editFielder;
     }
 
-    public void update(EditFielderForm editfFielder) {
+    public void update(EditFielderForm editFielder) {
         // データベースに登録する値を保持するインスタンス
         Fielder fielder = new Fielder();
 
         // 画面から受け取った値をデータベースに保存するインスタンスに渡す
-        fielder.setPlayerId(editfFielder.getPlayerId());
-        fielder.setUniformNumber(editfFielder.getUniformNumber());
-        fielder.setName(editfFielder.getName());
-        fielder.setTeamId(editfFielder.getTeamId());
-        fielder.setOrderNum(editfFielder.getOrderNum());
-        fielder.setPosition(editfFielder.getPosition());
-        fielder.setBattingAverage(editfFielder.getBattingAverage());
-        fielder.setHit(editfFielder.getHit());
-        fielder.setDoubleHit(editfFielder.getDoubleHit());
-        fielder.setThreeHit(editfFielder.getThreeHit());
-        fielder.setHomerun(editfFielder.getHomerun());
-        fielder.setRunBattedIn(editfFielder.getRunBattedIn());
-        fielder.setBaseStealing(editfFielder.getBaseStealing());
+        fielder.setPlayerId(editFielder.getPlayerId());
+        fielder.setUniformNumber(editFielder.getUniformNumber());
+        fielder.setName(editFielder.getName());
+        fielder.setTeamId(editFielder.getTeamId());
+        fielder.setOrderNum(editFielder.getOrderNum());
+        fielder.setPosition(editFielder.getPosition());
+        fielder.setBattingAverage(editFielder.getBattingAverage());
+        fielder.setHit(editFielder.getHit());
+        fielder.setDoubleHit(editFielder.getDoubleHit());
+        fielder.setThreeHit(editFielder.getThreeHit());
+        fielder.setHomerun(editFielder.getHomerun());
+        fielder.setRunBattedIn(editFielder.getRunBattedIn());
+        fielder.setBaseStealing(editFielder.getBaseStealing());
 
         // データベースに登録する
         repository.save(fielder);
@@ -155,23 +155,23 @@ public class FielderService {
         return editFielder;
     }
 
-    public void CLUpdate(EditFielderForm editfFielder) {
+    public void CLUpdate(EditFielderForm editFielder) {
         // データベースに登録する値を保持するインスタンス
         CLFielder fielder = new CLFielder();
 
         // 画面から受け取った値をデータベースに保存するインスタンスに渡す
-        fielder.setPlayerId(editfFielder.getPlayerId());
-        fielder.setUniformNumber(editfFielder.getUniformNumber());
-        fielder.setName(editfFielder.getName());
-        fielder.setOrderNum(editfFielder.getOrderNum());
-        fielder.setPosition(editfFielder.getPosition());
-        fielder.setBattingAverage(editfFielder.getBattingAverage());
-        fielder.setHit(editfFielder.getHit());
-        fielder.setDoubleHit(editfFielder.getDoubleHit());
-        fielder.setThreeHit(editfFielder.getThreeHit());
-        fielder.setHomerun(editfFielder.getHomerun());
-        fielder.setRunBattedIn(editfFielder.getRunBattedIn());
-        fielder.setBaseStealing(editfFielder.getBaseStealing());
+        fielder.setPlayerId(editFielder.getPlayerId());
+        fielder.setUniformNumber(editFielder.getUniformNumber());
+        fielder.setName(editFielder.getName());
+        fielder.setOrderNum(editFielder.getOrderNum());
+        fielder.setPosition(editFielder.getPosition());
+        fielder.setBattingAverage(editFielder.getBattingAverage());
+        fielder.setHit(editFielder.getHit());
+        fielder.setDoubleHit(editFielder.getDoubleHit());
+        fielder.setThreeHit(editFielder.getThreeHit());
+        fielder.setHomerun(editFielder.getHomerun());
+        fielder.setRunBattedIn(editFielder.getRunBattedIn());
+        fielder.setBaseStealing(editFielder.getBaseStealing());
 
         // データベースに登録する
         clFielderRepository.save(fielder);

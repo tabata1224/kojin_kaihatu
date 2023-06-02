@@ -12,6 +12,9 @@
         <h1>投手の情報を編集する</h1>
         <form th:action="@{/clPitcher-edit}" th:object="${editPitcherForm} " method="POST">
             <div>
+                <input id="playerId" type="hidden" th:field="*{playerId}">
+            </div>
+            <div>
                 <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
                     uniformNumber Error</p>

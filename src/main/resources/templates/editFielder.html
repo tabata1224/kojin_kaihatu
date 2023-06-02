@@ -13,6 +13,9 @@
         <h1>野手の情報を編集する</h1>
         <form th:action="@{/fielder-edit}" th:object="${editFielderForm} " method="POST" name="clickedFielder">
             <div>
+                <input id="playerId" type="hidden" th:field="*{playerId}">
+            </div>
+            <div>
                 <label for="uniformNumber">背番号</label><br>
                 <p th:if="${#fields.hasErrors('uniformNumber')}" th:errors="*{uniformNumber}" class="text-danger">
                     uniformNumber Error</p>
